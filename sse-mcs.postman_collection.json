@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "bb9569af-ad66-476a-bea1-49e62e40c16e",
+		"name": "sse-mcs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "dispatchEvent",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/sse/dispatchEvent?title=Corona News&text=Corona is living its last days it will finish soon and every one will be free. Corona is living its last days it will finish soon and every one will be free. Corona is living its last days it will finish soon and every one will be free.",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"sse",
+						"dispatchEvent"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Corona News"
+						},
+						{
+							"key": "text",
+							"value": "Corona is living its last days it will finish soon and every one will be free. Corona is living its last days it will finish soon and every one will be free. Corona is living its last days it will finish soon and every one will be free."
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dispatchEventToSpecificUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/sse/dispatchEventToSpecificUser?title=Corona News&text=Corona is living its last days it will finish soon and every one will be free. Corona is living its last days it will finish soon and every one will be free. Corona is living its last days it will finish soon and every one will be free.&userID=179",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"sse",
+						"dispatchEventToSpecificUser"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Corona News"
+						},
+						{
+							"key": "text",
+							"value": "Corona is living its last days it will finish soon and every one will be free. Corona is living its last days it will finish soon and every one will be free. Corona is living its last days it will finish soon and every one will be free."
+						},
+						{
+							"key": "userID",
+							"value": "179"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
