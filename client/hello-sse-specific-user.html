@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Client SSE example</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- Bootstrap CSS -->
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+    .panel {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+    h3 {
+      color: blue;
+    }
+    .pstyle {
+      font-size: 2rem;
+      font-family: Verdana, sans-serif;
+    }
+    p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 15px;
+    }
+
+</style>
+<script>
+    $(document).ready(function () {
+      var userID = Math.floor(Math.random() * 1000 + 1);
+      $("#userspan").text(userID);
+
+      var urlEndPoint = 'http://localhost:8083/sse/subscribeSpecificUser?userID=' + userID;
+      var eventSource = new EventSource(urlEndPoint);
+
+      eventSource.addEventListener("latestNews", function (event) {
+        // console.log(event.data)
+        var articleData = JSON.parse(event.data);
+        addBlock(articleData.title, articleData.text);
+      });
+    });
+
+    evtSource.addEventListener("error", function (event) {
+      console.log("Error :" + event.currentTarget.readyState);
+      if (event.currentTarget.readyState == EventSource.CLOSED) {
+      } else {
+        evtSource.close();
+      }
+    });
+
+    window.onbeforeunload = function () {
+      evtSource.close();
+    };
+
+    function addBlock(title, text) {
+      var a = document.createElement("article");
+      // Title
+      var h = document.createElement("H3");
+      var t = document.createTextNode(title);
+      h.appendChild(t);
+
+      // Paragraph
+      var para = document.createElement("P");
+      para.innerHTML = text;
+      a.appendChild(h);
+      a.appendChild(para);
+      document.getElementById("pack").appendChild(a);
+    }
+
+</script>
+<body>
+<div class="container pstyle text-left" id="pack">
+    </br>
+    <h3><b>News TimeLine for User <span id="userspan" class="spanStyle"></span></b></h3>
+</div>
+</div>
+</body>
+</html>
